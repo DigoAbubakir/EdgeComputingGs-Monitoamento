@@ -58,7 +58,7 @@ Assista ao funcionamento do projeto neste vídeo:
 ## Integrantes do Grupo:
 - Rodrigo RM:561479
 - Samuel RM:566244
-- João Lucas RM562608
+- João Lucas RM:562608
 
 ![Esquema ilustrativo do circuito](circuito.png)
 
