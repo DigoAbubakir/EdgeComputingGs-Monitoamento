@@ -55,7 +55,7 @@ Assista ao funcionamento do projeto neste vídeo:
 
 ## 🛠️ Montagem do Circuito
 
-![Esquema ilustrativo do circuito](figuras/esquema_circuito.png)
+![Esquema ilustrativo do circuito](circuito.png)
 
 ---
 
