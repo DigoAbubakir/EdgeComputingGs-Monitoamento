@@ -1,0 +1,1 @@
+# EdgeComputingGs-Monitoamento
