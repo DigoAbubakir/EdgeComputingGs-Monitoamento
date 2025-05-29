@@ -46,14 +46,12 @@ Assista ao funcionamento do projeto neste vídeo:
 - Comentado e estruturado para facilitar o entendimento
 - Utiliza boas práticas de nomenclatura, indentação e lógica
 
-> Veja o arquivo `monitor_nivel.ino` incluído neste repositório.
+> Veja o arquivo `Codigo Wokwi` incluído neste repositório.
 
 ## 📚 Bibliotecas Necessárias
 
 - `LiquidCrystal_I2C`
 - `DHT sensor library by Adafruit`
-
-Instale via **Gerenciador de Bibliotecas** da Arduino IDE.
 
 ## 🛠️ Montagem do Circuito
 
