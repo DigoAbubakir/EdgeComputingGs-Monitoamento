@@ -1,0 +1,85 @@
+#include <LiquidCrystal_I2C.h>
+#include <DHT.h>
+
+// Definições dos pinos (ajustados conforme o circuito real)
+#define TRIG_PIN 7
+#define ECHO_PIN 6
+#define DHT_PIN 4
+#define DHT_TYPE DHT22
+#define BUZZER_PIN 8
+#define LED_VERDE 11
+#define LED_AMARELO 13
+#define LED_VERMELHO 12
+#define BUZZER_PIN 9
+
+// Inicialização do sensor DHT e LCD
+DHT dht(DHT_PIN, DHT_TYPE);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+// Variáveis auxiliares
+long duracao;
+float distancia;
+
+void setup() {
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+  pinMode(LED_VERDE, OUTPUT);
+  pinMode(LED_AMARELO, OUTPUT);
+  pinMode(LED_VERMELHO, OUTPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+
+  Serial.begin(9600);
+  dht.begin();
+  lcd.init();
+  lcd.backlight();
+}
+
+void loop() {
+  // Medir distância com sensor ultrassônico
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+
+  duracao = pulseIn(ECHO_PIN, HIGH);
+  distancia = duracao * 0.034 / 2;
+
+  // Ler temperatura e umidade
+  float temperatura = dht.readTemperature();
+  float umidade = dht.readHumidity();
+
+  // Exibir no LCD
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Nivel: ");
+  lcd.print(distancia, 0);
+  lcd.print(" cm");
+
+  lcd.setCursor(0, 1);
+  lcd.print("Umi: ");
+  lcd.print(umidade, 0);
+  lcd.print("% T: ");
+  lcd.print(temperatura, 0);
+
+  // Lógica de LEDs e buzzer
+  if (distancia > 20) {
+    digitalWrite(LED_VERDE, HIGH);
+    digitalWrite(LED_AMARELO, LOW);
+    digitalWrite(LED_VERMELHO, LOW);
+    digitalWrite(BUZZER_PIN, LOW);
+  } else if (distancia <= 20 && distancia > 10) {
+    digitalWrite(LED_VERDE, LOW);
+    digitalWrite(LED_AMARELO, HIGH);
+    digitalWrite(LED_VERMELHO, LOW);
+    digitalWrite(BUZZER_PIN, LOW);
+  } else {
+    digitalWrite(LED_VERDE, LOW);
+    digitalWrite(LED_AMARELO, LOW);
+    digitalWrite(LED_VERMELHO, HIGH);
+    digitalWrite(BUZZER_PIN, HIGH);
+  }
+
+  delay(2000);
+}
